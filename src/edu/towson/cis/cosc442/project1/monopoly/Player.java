@@ -26,7 +26,7 @@ public class Player {
 	}
 
     public void buyProperty(Cell property, int amount) {
-        property.setOwner(this);
+        property.setTheOwner(this);
         if(property instanceof PropertyCell) {
             PropertyCell cell = (PropertyCell)property;
             properties.add(cell);
@@ -67,7 +67,7 @@ public class Player {
 	public void exchangeProperty(Player player) {
 		for(int i = 0; i < getPropertyNumber(); i++ ) {
 			PropertyCell cell = getProperty(i);
-			cell.setOwner(player);
+			cell.setTheOwner(player);
 			if(player == null) {
 				cell.setAvailable(true);
 				cell.setNumHouses(0);
@@ -160,18 +160,18 @@ public class Player {
 		return getPropertyNumberForColor(UtilityCell.COLOR_GROUP);
 	}
 	
-	public void payRentTo(Player owner, int rentValue) {
+	public void payRentTo(Player theOwner, int rentValue) {
 		if(money < rentValue) {
-			owner.money += money;
+			theOwner.money += money;
 			money -= rentValue;
 		}
 		else {
 			money -= rentValue;
-			owner.money +=rentValue;
+			theOwner.money +=rentValue;
 		}
 		if(isBankrupt()) {
 			money = 0;
-			exchangeProperty(owner);
+			exchangeProperty(theOwner);
 		}
 	}
 	
@@ -222,7 +222,7 @@ public class Player {
 	}
 
     public void sellProperty(Cell property, int amount) {
-        property.setOwner(null);
+        property.setTheOwner(null);
         if(property instanceof PropertyCell) {
             properties.remove(property);
         }
