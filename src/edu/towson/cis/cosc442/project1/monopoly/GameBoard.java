@@ -1,18 +1,19 @@
 package edu.towson.cis.cosc442.project1.monopoly;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameBoard {
 
 	private ArrayList<Cell> cells = new ArrayList<Cell>();
     private ArrayList<Card> chanceCards = new ArrayList<Card>();
 	//the key of colorGroups is the name of the color group.
-	private Hashtable<String, Integer> colorGroups = new Hashtable<String, Integer>();
+	private Map<String, Integer> colorGroups = new HashMap<String, Integer>();
 	private ArrayList<Card> communityChestCards = new ArrayList<Card>();
 	public GameBoard() {
 		Cell go = new GoCell();
-		addCell(go);
+		cells.add(go);
 	}
 
     public void addCard(Card card) {
@@ -74,7 +75,7 @@ public class GameBoard {
 	}
 	
 	public int getPropertyNumberForColor(String name) {
-		Integer number = (Integer)colorGroups.get(name);
+		Integer number = colorGroups.get(name);
 		if(number != null) {
 			return number.intValue();
 		}
